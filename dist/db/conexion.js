@@ -1,8 +1,27 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const sequelize_1 = require("sequelize");
-const sequelize = new sequelize_1.Sequelize('AUTOREPUESTOSCRUZ', 'postgres', 'contreras123', {
-    host: 'localhost',
-    dialect: 'postgres'
-});
+// config/config.js
+require('dotenv').config();
+module.exports = {
+    development: {
+        url: process.env.DATABASE_URL,
+        dialect: 'postgres',
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false,
+            },
+        },
+    },
+    production: {
+        url: process.env.DATABASE_URL,
+        dialect: 'postgres',
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false,
+            },
+        },
+    },
+};
 exports.default = sequelize;

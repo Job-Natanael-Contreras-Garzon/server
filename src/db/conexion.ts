@@ -1,8 +1,28 @@
-import { Sequelize } from 'sequelize';
+import dotenv from 'dotenv';
 
-const sequelize = new Sequelize('AUTOREPUESTOSCRUZ','postgres','contreras123',{
-    host: 'localhost',
-    dialect: 'postgres'
-})
+dotenv.config();
 
-export default sequelize;
+const config = {
+  development: {
+    url: process.env.DATABASE_URL as string,
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
+  },
+  production: {
+    url: process.env.DATABASE_URL as string,
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
+  },
+};
+
+export default config;
