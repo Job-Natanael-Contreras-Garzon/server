@@ -43,14 +43,14 @@ class Server {
     }
     midlewares() {
         this.app.use(express_1.default.json());
-        //cors
+        // cors
         this.app.use((0, cors_1.default)());
     }
     dbConnect() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 yield User_1.User.sync();
-                console.log('Base conectada con existo');
+                console.log('Base conectada con éxito');
             }
             catch (error) {
                 console.log('Error en la base de datos: ', error);

@@ -1,28 +1,25 @@
-import dotenv from 'dotenv';
+import { Sequelize, Options } from 'sequelize';
+import config from '../config/config';
 
-dotenv.config();
+interface DialectOptions {
+  ssl: {
+    require: boolean;
+    rejectUnauthorized: boolean;
+  };
+}
 
-const config = {
-  development: {
-    url: process.env.DATABASE_URL as string,
-    dialect: 'postgres',
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
-  },
-  production: {
-    url: process.env.DATABASE_URL as string,
-    dialect: 'postgres',
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
-  },
-};
+interface Config {
+  url: string;
+  dialect: string;
+  dialectOptions: DialectOptions;
+}
 
-export default config;
+const env = (process.env.NODE_ENV as 'development' | 'production') || 'development';
+const sequelizeConfig: Config = config[env];
+
+const sequelize = new Sequelize(sequelizeConfig.url, {
+  dialect: sequelizeConfig.dialect,
+  dialectOptions: sequelizeConfig.dialectOptions,
+} as Options);
+
+export default sequelize;
