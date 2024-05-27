@@ -5,7 +5,7 @@ import routerUser from '../routes/user';
 import routerfactura from '../routes/factura';
 import routerproveedor from '../routes/proveedor';
 import routeralmacen from '../routes/almacen';
-import { User } from './User';
+import sequelize from '../db/conexion';
 
 class Server {
     private app: Application;
@@ -14,15 +14,15 @@ class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT || '3001';
-        this.listen();
-        this.midlewares();
+        this.middlewares();
         this.routes();
         this.dbConnect();
+        this.listen();
     }
 
     listen() {
         this.app.listen(this.port, () => {
-            console.log('Aplicacion corriendo en el puerto ' + this.port);
+            console.log('Aplicación corriendo en el puerto ' + this.port);
         });
     }
 
@@ -34,7 +34,7 @@ class Server {
         this.app.use('/api/almacen', routeralmacen);
     }
 
-    midlewares() {
+    middlewares() {
         this.app.use(express.json());
         // cors
         this.app.use(cors());
@@ -42,7 +42,7 @@ class Server {
 
     async dbConnect() {
         try {
-            await User.sync();
+            await sequelize.authenticate();
             console.log('Base conectada con éxito');
         } catch (error) {
             console.log('Error en la base de datos: ', error);
@@ -51,3 +51,4 @@ class Server {
 }
 
 export default Server;
+ 

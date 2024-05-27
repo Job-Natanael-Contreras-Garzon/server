@@ -21,7 +21,6 @@ export const User = sequelize.define('User', {
     timestamps: false // Indica que no hay columnas 'createdAt' y 'updatedAt' en la tabla
 });
 
-
 // Llamar al procedimiento almacenado
 export async function callCrearUsuarioProcedure(nombreAdministrador: string, telefono: string, correoElectronico: string, username: string, password: string, tipoPermiso: string) {
     try {

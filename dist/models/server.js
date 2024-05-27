@@ -19,19 +19,19 @@ const user_1 = __importDefault(require("../routes/user"));
 const factura_1 = __importDefault(require("../routes/factura"));
 const proveedor_1 = __importDefault(require("../routes/proveedor"));
 const almacen_1 = __importDefault(require("../routes/almacen"));
-const User_1 = require("./User");
+const conexion_1 = __importDefault(require("../db/conexion"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '3001';
-        this.listen();
-        this.midlewares();
+        this.middlewares();
         this.routes();
         this.dbConnect();
+        this.listen();
     }
     listen() {
         this.app.listen(this.port, () => {
-            console.log('Aplicacion corriendo en el puerto ' + this.port);
+            console.log('Aplicación corriendo en el puerto ' + this.port);
         });
     }
     routes() {
@@ -41,7 +41,7 @@ class Server {
         this.app.use('/api/proveedor', proveedor_1.default);
         this.app.use('/api/almacen', almacen_1.default);
     }
-    midlewares() {
+    middlewares() {
         this.app.use(express_1.default.json());
         // cors
         this.app.use((0, cors_1.default)());
@@ -49,7 +49,7 @@ class Server {
     dbConnect() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield User_1.User.sync();
+                yield conexion_1.default.authenticate();
                 console.log('Base conectada con éxito');
             }
             catch (error) {
