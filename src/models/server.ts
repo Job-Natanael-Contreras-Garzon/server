@@ -15,7 +15,7 @@ class Server {
         this.app = express();
         this.port = process.env.PORT || '3001';
         this.listen();
-        this.middlewares();
+        this.midlewares();
         this.routes();
         this.dbConnect();
     }
@@ -34,11 +34,13 @@ class Server {
         this.app.use('/api/almacen', routeralmacen);
     }
 
-    middlewares() {
+    midlewares() {
         this.app.use(express.json());
-        // Configurar CORS
+        // cors
         this.app.use(cors({
-            origin: 'https://proyectocruz.vercel.app'  // Cambia esto al dominio de tu frontend
+            origin: 'https://proyectocruz.vercel.app',
+            methods: ['GET', 'POST', 'PUT', 'DELETE'],
+            allowedHeaders: ['Content-Type', 'Authorization']
         }));
     }
 
