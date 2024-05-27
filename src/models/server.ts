@@ -5,7 +5,7 @@ import routerUser from '../routes/user';
 import routerfactura from '../routes/factura';
 import routerproveedor from '../routes/proveedor';
 import routeralmacen from '../routes/almacen';
-import sequelize from '../db/conexion';
+import { User } from './User';
 
 class Server {
     private app: Application;
@@ -14,15 +14,15 @@ class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT || '3001';
+        this.listen();
         this.middlewares();
         this.routes();
         this.dbConnect();
-        this.listen();
     }
 
     listen() {
         this.app.listen(this.port, () => {
-            console.log('Aplicación corriendo en el puerto ' + this.port);
+            console.log('Aplicacion corriendo en el puerto ' + this.port);
         });
     }
 
@@ -36,13 +36,15 @@ class Server {
 
     middlewares() {
         this.app.use(express.json());
-        // cors
-        this.app.use(cors());
+        // Configurar CORS
+        this.app.use(cors({
+            origin: 'https://proyectocruz.vercel.app'  // Cambia esto al dominio de tu frontend
+        }));
     }
 
     async dbConnect() {
         try {
-            await sequelize.authenticate();
+            await User.sync();
             console.log('Base conectada con éxito');
         } catch (error) {
             console.log('Error en la base de datos: ', error);
@@ -51,4 +53,3 @@ class Server {
 }
 
 export default Server;
- 
