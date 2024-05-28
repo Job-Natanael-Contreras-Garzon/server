@@ -12,40 +12,51 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// src/index.ts
 const express_1 = __importDefault(require("express"));
-const cors_1 = __importDefault(require("cors"));
-const dotenv_1 = __importDefault(require("dotenv"));
+const cors_1 = __importDefault(require("./config/cors"));
 const producto_1 = __importDefault(require("./routes/producto"));
 const user_1 = __importDefault(require("./routes/user"));
 const factura_1 = __importDefault(require("./routes/factura"));
 const proveedor_1 = __importDefault(require("./routes/proveedor"));
 const almacen_1 = __importDefault(require("./routes/almacen"));
 const User_1 = require("./models/User");
-dotenv_1.default.config();
-const app = (0, express_1.default)();
-const port = process.env.PORT || 3001;
-app.use(express_1.default.json());
-// CORS configuration
-app.use((0, cors_1.default)({
-    origin: 'https://proyectocruz.vercel.app'
-}));
-app.use('/api/producto', producto_1.default);
-app.use('/api/users', user_1.default);
-app.use('/api/factura', factura_1.default);
-app.use('/api/proveedor', proveedor_1.default);
-app.use('/api/almacen', almacen_1.default);
-app.get('/', (req, res) => {
-    res.send('API is running');
-});
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
-(() => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield User_1.User.sync();
-        console.log('Database connected successfully');
+class Server {
+    constructor() {
+        this.app = (0, express_1.default)();
+        this.port = process.env.PORT || '3001';
+        this.listen();
+        this.middlewares();
+        this.routes();
+        this.dbConnect();
     }
-    catch (error) {
-        console.error('Database connection failed:', error);
+    listen() {
+        this.app.listen(this.port, () => {
+            console.log('Aplicacion corriendo en el puerto ' + this.port);
+        });
     }
-}))();
+    routes() {
+        this.app.use('/api/producto', producto_1.default);
+        this.app.use('/api/users', user_1.default);
+        this.app.use('/api/factura', factura_1.default);
+        this.app.use('/api/proveedor', proveedor_1.default);
+        this.app.use('/api/almacen', almacen_1.default);
+    }
+    middlewares() {
+        this.app.use(express_1.default.json());
+        // cors
+        this.app.use(cors_1.default);
+    }
+    dbConnect() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield User_1.User.sync();
+                console.log('Base conectada con éxito');
+            }
+            catch (error) {
+                console.log('Error en la base de datos: ', error);
+            }
+        });
+    }
+}
+exports.default = Server;
