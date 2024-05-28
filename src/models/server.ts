@@ -9,15 +9,15 @@ import { User } from './User';
 
 class Server {
     private app: Application;
-    private port: String;
+    private port: string;
 
     constructor() {
         this.app = express();
         this.port = process.env.PORT || '3001';
+        this.listen();
         this.middlewares();
         this.routes();
         this.dbConnect();
-        this.listen();
     }
 
     listen() {
@@ -36,7 +36,8 @@ class Server {
 
     middlewares() {
         this.app.use(express.json());
-        this.app.use(cors({ origin: '*' }));  // Allow all origins
+        // CORS
+        this.app.use(cors({ origin: 'https://proyectocruz.vercel.app' }));
     }
 
     async dbConnect() {

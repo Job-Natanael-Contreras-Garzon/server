@@ -24,10 +24,10 @@ class Server {
     constructor() {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '3001';
+        this.listen();
         this.middlewares();
         this.routes();
         this.dbConnect();
-        this.listen();
     }
     listen() {
         this.app.listen(this.port, () => {
@@ -43,7 +43,8 @@ class Server {
     }
     middlewares() {
         this.app.use(express_1.default.json());
-        this.app.use((0, cors_1.default)({ origin: '*' })); // Allow all origins
+        // CORS
+        this.app.use((0, cors_1.default)({ origin: 'https://proyectocruz.vercel.app' }));
     }
     dbConnect() {
         return __awaiter(this, void 0, void 0, function* () {
