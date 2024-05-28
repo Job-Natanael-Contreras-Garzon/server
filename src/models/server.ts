@@ -14,15 +14,15 @@ class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT || '3001';
-        this.listen();
-        this.midlewares();
+        this.middlewares();
         this.routes();
         this.dbConnect();
+        this.listen();
     }
 
     listen() {
         this.app.listen(this.port, () => {
-            console.log('Aplicacion corriendo en el puerto ' + this.port);
+            console.log('Aplicación corriendo en el puerto ' + this.port);
         });
     }
 
@@ -34,12 +34,9 @@ class Server {
         this.app.use('/api/almacen', routeralmacen);
     }
 
-    midlewares() {
+    middlewares() {
         this.app.use(express.json());
-        // cors
-        this.app.use(cors({
-            origin: 'https://proyectocruz.vercel.app'
-        }));
+        this.app.use(cors({ origin: '*' }));  // Allow all origins
     }
 
     async dbConnect() {
