@@ -14,10 +14,10 @@ class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT || '3001';
+        this.listen();
         this.midlewares();
         this.routes();
         this.dbConnect();
-        this.listen();
     }
 
     listen() {
@@ -36,10 +36,12 @@ class Server {
 
     midlewares() {
         this.app.use(express.json());
+        // cors
         this.app.use(cors({
             origin: 'https://proyectocruz.vercel.app',
             methods: ['GET', 'POST', 'PUT', 'DELETE'],
-            allowedHeaders: ['Content-Type', 'Authorization']
+            allowedHeaders: ['Content-Type', 'Authorization'],
+            credentials: true
         }));
     }
 
