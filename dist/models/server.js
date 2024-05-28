@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const cors_1 = __importDefault(require("cors"));
 const producto_1 = __importDefault(require("../routes/producto"));
 const user_1 = __importDefault(require("../routes/user"));
 const factura_1 = __importDefault(require("../routes/factura"));
@@ -24,10 +23,10 @@ class Server {
     constructor() {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '3001';
-        this.listen();
         this.midlewares();
         this.routes();
         this.dbConnect();
+        this.listen();
     }
     listen() {
         this.app.listen(this.port, () => {
@@ -43,12 +42,12 @@ class Server {
     }
     midlewares() {
         this.app.use(express_1.default.json());
-        // cors
-        this.app.use((0, cors_1.default)({
-            origin: 'https://proyectocruz.vercel.app', // tu frontend URL
-            methods: ['GET', 'POST', 'PUT', 'DELETE'],
-            allowedHeaders: ['Content-Type', 'Authorization']
-        }));
+        this.app.use((req, res, next) => {
+            res.header('Access-Control-Allow-Origin', 'https://proyectocruz.vercel.app');
+            res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+            res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+            next();
+        });
     }
     dbConnect() {
         return __awaiter(this, void 0, void 0, function* () {
