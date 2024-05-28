@@ -37,7 +37,11 @@ class Server {
     midlewares() {
         this.app.use(express.json());
         // cors
-        this.app.use(cors());
+        this.app.use(cors({
+            origin: 'https://proyectocruz.vercel.app', // tu frontend URL
+            methods: ['GET', 'POST', 'PUT', 'DELETE'],
+            allowedHeaders: ['Content-Type', 'Authorization']
+        }));
     }
 
     async dbConnect() {
