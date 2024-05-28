@@ -36,12 +36,11 @@ class Server {
 
     midlewares() {
         this.app.use(express.json());
-        this.app.use((req, res, next) => {
-            res.header('Access-Control-Allow-Origin', 'https://proyectocruz.vercel.app');
-            res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-            res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-            next();
-        });
+        this.app.use(cors({
+            origin: 'https://proyectocruz.vercel.app',
+            methods: ['GET', 'POST', 'PUT', 'DELETE'],
+            allowedHeaders: ['Content-Type', 'Authorization']
+        }));
     }
 
     async dbConnect() {
