@@ -38,10 +38,7 @@ class Server {
         this.app.use(express.json());
         // cors
         this.app.use(cors({
-            origin: 'https://proyectocruz.vercel.app',
-            methods: ['GET', 'POST', 'PUT', 'DELETE'],
-            allowedHeaders: ['Content-Type', 'Authorization'],
-            credentials: true
+            origin: 'https://proyectocruz.vercel.app'
         }));
     }
 

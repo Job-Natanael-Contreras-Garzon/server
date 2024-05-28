@@ -45,10 +45,7 @@ class Server {
         this.app.use(express_1.default.json());
         // cors
         this.app.use((0, cors_1.default)({
-            origin: 'https://proyectocruz.vercel.app',
-            methods: ['GET', 'POST', 'PUT', 'DELETE'],
-            allowedHeaders: ['Content-Type', 'Authorization'],
-            credentials: true
+            origin: 'https://proyectocruz.vercel.app'
         }));
     }
     dbConnect() {
