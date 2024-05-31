@@ -39,3 +39,4 @@ function insertar_factura(nombre_cliente, correo_cliente, ci_cliente, telefono_c
     });
 }
 exports.insertar_factura = insertar_factura;
+//# sourceMappingURL=factura.js.map

@@ -87,3 +87,4 @@ const updateProveedor = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.updateProveedor = updateProveedor;
+//# sourceMappingURL=poveedor.js.map

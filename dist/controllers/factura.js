@@ -28,3 +28,4 @@ const newFactura = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.newFactura = newFactura;
+//# sourceMappingURL=factura.js.map

@@ -12,3 +12,4 @@ const sequelize = new sequelize_1.Sequelize(sequelizeConfig.url, {
     dialectOptions: sequelizeConfig.dialectOptions,
 });
 exports.default = sequelize;
+//# sourceMappingURL=conexion.js.map

@@ -61,3 +61,4 @@ class Server {
 }
 const server = new Server();
 exports.default = server;
+//# sourceMappingURL=index.js.map

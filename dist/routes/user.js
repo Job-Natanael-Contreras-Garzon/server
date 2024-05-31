@@ -8,3 +8,4 @@ router.post('/newPassword', user_1.newPassword);
 router.post('/login', user_1.loginUser);
 router.post('/permiso', user_1.UserPer);
 exports.default = router;
+//# sourceMappingURL=user.js.map

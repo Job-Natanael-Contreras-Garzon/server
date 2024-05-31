@@ -9,3 +9,4 @@ router.delete('/:id', almacen_1.deleteAlamcen);
 router.post('/', almacen_1.newAlmacen);
 router.put('/:id', almacen_1.updateAlamcen);
 exports.default = router;
+//# sourceMappingURL=almacen.js.map

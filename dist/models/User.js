@@ -90,3 +90,4 @@ function obtener_categoria_permiso(username) {
     });
 }
 exports.obtener_categoria_permiso = obtener_categoria_permiso;
+//# sourceMappingURL=User.js.map

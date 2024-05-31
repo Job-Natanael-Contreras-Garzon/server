@@ -30,3 +30,4 @@ exports.Proveedor = conexion_1.default.define('Proveedor', {
     tableName: 'proveedores', // Nombre de la tabla existente en la base de datos
     timestamps: false // Indica que no hay columnas 'createdAt' y 'updatedAt' en la tabla
 });
+//# sourceMappingURL=proveedor.js.map

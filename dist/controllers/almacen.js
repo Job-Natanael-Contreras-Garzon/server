@@ -87,3 +87,4 @@ const updateAlamcen = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.updateAlamcen = updateAlamcen;
+//# sourceMappingURL=almacen.js.map

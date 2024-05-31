@@ -9,3 +9,4 @@ router.delete('/:codigo', poveedor_1.deleteProveedor);
 router.post('/', poveedor_1.newProveedor);
 router.put('/:codigo', poveedor_1.updateProveedor);
 exports.default = router;
+//# sourceMappingURL=proveedor.js.map

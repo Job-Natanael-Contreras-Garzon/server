@@ -10,3 +10,4 @@ const corsOptions = {
     optionsSuccessStatus: 200
 };
 exports.default = (0, cors_1.default)(corsOptions);
+//# sourceMappingURL=cors.js.map

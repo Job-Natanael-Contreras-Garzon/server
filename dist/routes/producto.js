@@ -8,3 +8,4 @@ router.post('/newProduct', producto_1.newProducto);
 router.post('/updateProduct', producto_1.updateProducto);
 router.delete('/:cod', producto_1.deleteProduct);
 exports.default = router;
+//# sourceMappingURL=producto.js.map

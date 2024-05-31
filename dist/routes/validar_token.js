@@ -27,3 +27,4 @@ const validar_token = (req, res, next) => {
     }
 };
 exports.default = validar_token;
+//# sourceMappingURL=validar_token.js.map

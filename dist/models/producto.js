@@ -72,3 +72,4 @@ function obtenerProductos() {
     });
 }
 exports.obtenerProductos = obtenerProductos;
+//# sourceMappingURL=producto.js.map

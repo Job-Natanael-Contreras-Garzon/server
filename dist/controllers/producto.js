@@ -83,3 +83,4 @@ const getProducto = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.getProducto = getProducto;
+//# sourceMappingURL=producto.js.map

@@ -38,3 +38,4 @@ exports.Almacen = conexion_1.default.define('Almacen', {
     tableName: 'almacen', // Nombre de la tabla existente en la base de datos
     timestamps: false // Indica que no hay columnas 'createdAt' y 'updatedAt' en la tabla
 });
+//# sourceMappingURL=almacen.js.map
