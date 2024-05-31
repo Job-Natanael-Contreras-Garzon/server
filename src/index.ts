@@ -1,6 +1,8 @@
-// src/index.ts
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express, { Application } from 'express';
-import corsConfig from './config/cors';
+import cors from 'cors';
 import routesProducto from './routes/producto';
 import routerUser from './routes/user';
 import routerfactura from './routes/factura';
@@ -15,19 +17,19 @@ class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT || '3001';
-        this.listen();
         this.middlewares();
         this.routes();
         this.dbConnect();
+        this.listen();
     }
 
-    listen() {
+    private listen() {
         this.app.listen(this.port, () => {
-            console.log('Aplicacion corriendo en el puerto ' + this.port);
+            console.log(`Aplicación corriendo en el puerto ${this.port}`);
         });
     }
 
-    routes() {
+    private routes() {
         this.app.use('/api/producto', routesProducto);
         this.app.use('/api/users', routerUser);
         this.app.use('/api/factura', routerfactura);
@@ -35,20 +37,20 @@ class Server {
         this.app.use('/api/almacen', routeralmacen);
     }
 
-    middlewares() {
+    private middlewares() {
         this.app.use(express.json());
-        // cors
-        this.app.use(corsConfig);
+        this.app.use(cors({ origin: 'https://proyectocruz.vercel.app' }));
     }
 
-    async dbConnect() {
+    private async dbConnect() {
         try {
             await User.sync();
-            console.log('Base conectada con éxito');
+            console.log('Base de datos conectada con éxito');
         } catch (error) {
-            console.log('Error en la base de datos: ', error);
+            console.error('Error en la base de datos: ', error);
         }
     }
 }
 
-export default Server;
+const server = new Server();
+export default server;

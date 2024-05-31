@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.obtener_categoria_permiso = exports.callActualizarPassword = exports.callCrearUsuarioProcedure = exports.User = void 0;
 const sequelize_1 = require("sequelize");
 const conexion_1 = __importDefault(require("../db/conexion"));
+// Definición del modelo User
 exports.User = conexion_1.default.define('User', {
     id: {
         type: sequelize_1.DataTypes.INTEGER,
@@ -34,12 +35,20 @@ exports.User = conexion_1.default.define('User', {
     tableName: 'usuario', // Nombre de la tabla existente en la base de datos
     timestamps: false // Indica que no hay columnas 'createdAt' y 'updatedAt' en la tabla
 });
-// Llamar al procedimiento almacenado
+// Llamar al procedimiento almacenado para crear usuario
 function callCrearUsuarioProcedure(nombreAdministrador, telefono, correoElectronico, username, password, tipoPermiso) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const [results, metadata] = yield conexion_1.default.query(`CALL crear_usuario('${nombreAdministrador}', '${telefono}', '${correoElectronico}', '${username}', '${password}', '${tipoPermiso}')`);
-            //console.log(results);
+            yield conexion_1.default.query(`CALL crear_usuario(:nombreAdministrador, :telefono, :correoElectronico, :username, :password, :tipoPermiso)`, {
+                replacements: {
+                    nombreAdministrador,
+                    telefono,
+                    correoElectronico,
+                    username,
+                    password,
+                    tipoPermiso
+                }
+            });
         }
         catch (error) {
             console.error('Error al llamar al procedimiento almacenado:', error);
@@ -47,10 +56,16 @@ function callCrearUsuarioProcedure(nombreAdministrador, telefono, correoElectron
     });
 }
 exports.callCrearUsuarioProcedure = callCrearUsuarioProcedure;
+// Llamar al procedimiento almacenado para actualizar contraseña
 function callActualizarPassword(username, password) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const [results, metadata] = yield conexion_1.default.query(`CALL actualizar_contrasena('${username}', '${password}')`);
+            yield conexion_1.default.query(`CALL actualizar_contrasena(:username, :password)`, {
+                replacements: {
+                    username,
+                    password
+                }
+            });
         }
         catch (error) {
             console.error('Error al llamar al procedimiento almacenado:', error);
@@ -58,10 +73,14 @@ function callActualizarPassword(username, password) {
     });
 }
 exports.callActualizarPassword = callActualizarPassword;
+// Obtener categoría de permiso
 function obtener_categoria_permiso(username) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const [results, metadata] = yield conexion_1.default.query(`SELECT obtener_categoria_permiso('${username}') AS categoria`);
+            const [results] = yield conexion_1.default.query(`SELECT obtener_categoria_permiso(:username) AS categoria`, {
+                replacements: { username },
+                type: sequelize_1.QueryTypes.SELECT
+            });
             return results;
         }
         catch (error) {

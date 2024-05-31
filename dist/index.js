@@ -12,9 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// src/index.ts
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const express_1 = __importDefault(require("express"));
-const cors_1 = __importDefault(require("./config/cors"));
+const cors_1 = __importDefault(require("cors"));
 const producto_1 = __importDefault(require("./routes/producto"));
 const user_1 = __importDefault(require("./routes/user"));
 const factura_1 = __importDefault(require("./routes/factura"));
@@ -25,14 +26,14 @@ class Server {
     constructor() {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '3001';
-        this.listen();
         this.middlewares();
         this.routes();
         this.dbConnect();
+        this.listen();
     }
     listen() {
         this.app.listen(this.port, () => {
-            console.log('Aplicacion corriendo en el puerto ' + this.port);
+            console.log(`Aplicación corriendo en el puerto ${this.port}`);
         });
     }
     routes() {
@@ -44,19 +45,19 @@ class Server {
     }
     middlewares() {
         this.app.use(express_1.default.json());
-        // cors
-        this.app.use(cors_1.default);
+        this.app.use((0, cors_1.default)({ origin: 'https://proyectocruz.vercel.app' }));
     }
     dbConnect() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 yield User_1.User.sync();
-                console.log('Base conectada con éxito');
+                console.log('Base de datos conectada con éxito');
             }
             catch (error) {
-                console.log('Error en la base de datos: ', error);
+                console.error('Error en la base de datos: ', error);
             }
         });
     }
 }
-exports.default = Server;
+const server = new Server();
+exports.default = server;
