@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import bycrypt from 'bcrypt';
+import bycrypt from 'bcryptjs';
 import { User, callActualizarPassword, obtener_categoria_permiso } from '../models/User';
 import jwt from 'jsonwebtoken'
 import { callCrearUsuarioProcedure } from '../models/User';

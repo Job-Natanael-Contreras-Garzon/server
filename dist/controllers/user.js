@@ -13,14 +13,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserPer = exports.loginUser = exports.newPassword = exports.newUser = void 0;
-const bcrypt_1 = __importDefault(require("bcrypt"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const User_1 = require("../models/User");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const User_2 = require("../models/User");
 const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { nombreAdministrador, telefono, correoElectronico, username, password, tipoPermiso } = req.body;
     //codificacion de la contraseña
-    const hashedPassword = yield bcrypt_1.default.hash(password, 10);
+    const hashedPassword = yield bcryptjs_1.default.hash(password, 10);
     //validar si el Usuario ya existe en la Base de Datos
     const user = yield User_1.User.findOne({ where: { username: username } });
     if (user) {
@@ -51,7 +51,7 @@ exports.newUser = newUser;
 const newPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = req.body;
     //Encriptamos el password
-    const hashedPassword = yield bcrypt_1.default.hash(password, 10);
+    const hashedPassword = yield bcryptjs_1.default.hash(password, 10);
     //validamos si el usuario existe en la base
     const user = yield User_1.User.findOne({ where: { username: username } });
     if (!user) {
@@ -83,7 +83,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
     //validamos el password
-    const passwordValido = yield bcrypt_1.default.compare(password, user.password);
+    const passwordValido = yield bcryptjs_1.default.compare(password, user.password);
     if (!passwordValido) {
         return res.status(400).json({
             msg: 'Password Incorrecta'
