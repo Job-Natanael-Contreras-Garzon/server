@@ -114,5 +114,7 @@ export const UserPer = async (req: Request, res: Response) => {
             msg: 'Ups, ocurrió un error',
             error
         });
+        console.log(error);
+        console.error(error);
     }
 };
