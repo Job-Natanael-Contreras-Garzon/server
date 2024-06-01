@@ -64,7 +64,7 @@ export async function callActualizarPassword(username: string, password: string)
 export async function obtener_categoria_permiso(username: string) {
     try {
         const [results] = await sequelize.query(
-            `SELECT obtener_categoria_permiso(:username) AS categoria`
+            `SELECT obtener_categoria_permiso('${username}') AS categoria`
         );
         return results;
     } catch (error) {
