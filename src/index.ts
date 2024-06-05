@@ -39,7 +39,7 @@ class Server {
 
     private middlewares() {
         this.app.use(express.json());
-        this.app.use(cors({ origin: 'https://proyectocruz.vercel.app' }));
+        this.app.use(cors(/*{ origin: 'https://proyectocruz.vercel.app' }*/));
     }
 
     private async dbConnect() {
