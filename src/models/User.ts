@@ -61,18 +61,14 @@ export async function callActualizarPassword(username: string, password: string)
 }
 
 // Obtener categoría de permiso
-export async function obtener_categoria_permiso(username: string) {
+export async function obtener_categoria_permiso(username:string) {
     try {
-        const [results] = await sequelize.query(
-            `SELECT obtener_categoria_permiso(:username) AS categoria`,
-            {
-                replacements: { username },
-                type: QueryTypes.SELECT
-            }
+        const [results, metadata] = await sequelize.query(
+            `SELECT obtener_categoria_permiso('${username}') AS categoria`
         );
         return results;
     } catch (error) {
         console.error('Error al llamar al procedimiento almacenado:', error);
         throw error; // Propaga el error para manejarlo en otro lugar si es necesario
     }
-}
+  }
