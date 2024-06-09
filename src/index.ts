@@ -1,14 +1,16 @@
 import dotenv from 'dotenv';
 dotenv.config();
   
-import express, { Application } from 'express';
-import cors from 'cors';
+import  express, {Application}  from "express";
+import cors from 'cors'
 import routesProducto from './routes/producto';
 import routerUser from './routes/user';
 import routerfactura from './routes/factura';
 import routerproveedor from './routes/proveedor';
 import routeralmacen from './routes/almacen';
 import routerbitacora from './routes/bitacora';
+import routerinventario from './routes/inventario';
+import routernotasalida from './routes/nota_salida';
 import { User } from './models/User';
 
 class Server {
@@ -32,11 +34,13 @@ class Server {
 
     private routes() {
         this.app.use('/api/producto', routesProducto);
-        this.app.use('/api/users', routerUser);
-        this.app.use('/api/factura', routerfactura);
-        this.app.use('/api/proveedor', routerproveedor);
-        this.app.use('/api/almacen', routeralmacen);
+        this.app.use('/api/users',routerUser);
+        this.app.use('/api/factura',routerfactura);
+        this.app.use('/api/proveedor',routerproveedor);
+        this.app.use('/api/almacen',routeralmacen);
         this.app.use('/api/bitacora',routerbitacora);
+        this.app.use('/api/inventario',routerinventario);
+        this.app.use('/api/notasalida',routernotasalida);
     }
 
     private middlewares() {
