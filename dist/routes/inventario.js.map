@@ -1,1 +1,0 @@
-{"version":3,"file":"inventario.js","sourceRoot":"","sources":["../../src/routes/inventario.ts"],"names":[],"mappings":";;AAAA,qCAAiC;AACjC,0DAA4F;AAE5F,MAAM,MAAM,GAAG,IAAA,gBAAM,GAAE,CAAC;AAExB,MAAM,CAAC,IAAI,CAAC,gBAAgB,EAAC,0BAAa,CAAC,CAAC;AAC5C,MAAM,CAAC,GAAG,CAAC,iBAAiB,EAAC,2BAAc,CAAC,CAAC;AAC7C,MAAM,CAAC,MAAM,CAAC,OAAO,EAAC,6BAAgB,CAAC,CAAC;AAExC,kBAAe,MAAM,CAAC"}
