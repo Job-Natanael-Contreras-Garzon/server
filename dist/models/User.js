@@ -77,10 +77,7 @@ exports.callActualizarPassword = callActualizarPassword;
 function obtener_categoria_permiso(username) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const [results] = yield conexion_1.default.query(`SELECT obtener_categoria_permiso(:username) AS categoria`, {
-                replacements: { username },
-                type: sequelize_1.QueryTypes.SELECT
-            });
+            const [results, metadata] = yield conexion_1.default.query(`SELECT obtener_categoria_permiso('${username}') AS categoria`);
             return results;
         }
         catch (error) {
