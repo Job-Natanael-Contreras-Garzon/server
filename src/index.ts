@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import { format } from 'date-fns';
+import { format } from 'date-fns-tz';
 
 import  express, {Application}  from "express";
 import cors from 'cors'
