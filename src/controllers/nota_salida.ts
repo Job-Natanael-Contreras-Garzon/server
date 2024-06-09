@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { Actulizar_detalle_salida, Eliminar_detalle_salida, Eliminar_nota_salida, Insertar_detalle_salida, Mostrar_detalle_nota_salida, NotaSalida ,Actulizar_nota_salida} from '../models/nota_salida';
-import { format, toDate } from 'date-fns-tz';
+import { format } from 'date-fns';
+import { toDate } from 'date-fns-tz';
+
 
 export const newNotaSalida = async (req: Request, res: Response) => {
     const { body } = req;
