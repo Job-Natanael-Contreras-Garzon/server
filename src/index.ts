@@ -11,7 +11,7 @@ import routeralmacen from './routes/almacen';
 import routerbitacora from './routes/bitacora';
 import routerinventario from './routes/inventario';
 import routernotasalida from './routes/nota_salida';
-import { User } from './models/User';
+import { User } from "./models/User";
 
 class Server {
     private app: Application;
