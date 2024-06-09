@@ -1,32 +1,36 @@
 import { Request, Response } from 'express';
-import { Actulizar_detalle_salida, Eliminar_detalle_salida, Eliminar_nota_salida, Insertar_detalle_salida, Mostrar_detalle_nota_salida, NotaSalida ,Actulizar_nota_salida} from '../models/nota_salida';
-import { format } from 'date-fns';
-import { toDate } from 'date-fns-tz';
-
+import { Actulizar_detalle_salida, Eliminar_detalle_salida, Eliminar_nota_salida, Insertar_detalle_salida, Mostrar_detalle_nota_salida, NotaSalida, Actulizar_nota_salida } from '../models/nota_salida';
+import { format as formatDate } from 'date-fns';
+import { toZonedTime, format } from 'date-fns-tz';
 
 export const newNotaSalida = async (req: Request, res: Response) => {
     const { body } = req;
-   // Ajustar la fecha a la zona horaria de Bolivia (GMT-4)
-   const boliviaTimeZone = 'America/La_Paz';
+    const boliviaTimeZone = 'America/La_Paz';
     const now = new Date();
-    const zonedDate = toDate(now, { timeZone: boliviaTimeZone });
+    // Convertir la fecha actual a la zona horaria de Bolivia
+    const zonedDate = toZonedTime(now, boliviaTimeZone);
 
     // Formatear la fecha en el formato deseado
     const formattedDate = format(zonedDate, 'yyyy-MM-dd', { timeZone: boliviaTimeZone });
     
     // Reemplazar la fecha en el cuerpo de la solicitud con la fecha ajustada
     body.fecha = formattedDate;
+
     try {
         const notaSalida = await NotaSalida.create(body);
         const cod = notaSalida.getDataValue('cod');
-        res.json(cod)
+        res.json(cod);
     } catch (error) {
         console.log(error);
         res.json({
             msg: `Upps ocurrio un error, comuniquese con soporte`
-        })
+        });
     }
 }
+
+// Sigue asegurándote de que los otros métodos manejen las fechas correctamente si es necesario.
+
+// Incluye tus otros métodos aquí de manera similar, y asegúrate de que manejan fechas correctamente si es necesario
 
 export const getNotas_de_Salida = async(req:Request,res: Response)=>{
     const listNsalida = await NotaSalida.findAll()
