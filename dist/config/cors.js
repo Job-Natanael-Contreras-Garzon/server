@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // src/config/cors.ts
 const cors_1 = __importDefault(require("cors"));
 const corsOptions = {
-    origin: 'https://proyectocruz.vercel.app',
     optionsSuccessStatus: 200
 };
 exports.default = (0, cors_1.default)(corsOptions);

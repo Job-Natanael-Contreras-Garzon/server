@@ -2,7 +2,7 @@
 import cors from 'cors';
 
 const corsOptions = {
-  origin: 'https://proyectocruz.vercel.app',
+  
   optionsSuccessStatus: 200
 };
 
