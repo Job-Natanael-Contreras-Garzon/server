@@ -14,10 +14,10 @@ const nota_salida_1 = require("../models/nota_salida");
 const date_fns_tz_1 = require("date-fns-tz");
 const newNotaSalida = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
-    // Ajustar la fecha a la zona horaria de Bolivia (GMT-4)
     const boliviaTimeZone = 'America/La_Paz';
     const now = new Date();
-    const zonedDate = (0, date_fns_tz_1.toDate)(now, { timeZone: boliviaTimeZone });
+    // Convertir la fecha actual a la zona horaria de Bolivia
+    const zonedDate = (0, date_fns_tz_1.toZonedTime)(now, boliviaTimeZone);
     // Formatear la fecha en el formato deseado
     const formattedDate = (0, date_fns_tz_1.format)(zonedDate, 'yyyy-MM-dd', { timeZone: boliviaTimeZone });
     // Reemplazar la fecha en el cuerpo de la solicitud con la fecha ajustada
@@ -35,6 +35,8 @@ const newNotaSalida = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.newNotaSalida = newNotaSalida;
+// Sigue asegurándote de que los otros métodos manejen las fechas correctamente si es necesario.
+// Incluye tus otros métodos aquí de manera similar, y asegúrate de que manejan fechas correctamente si es necesario
 const getNotas_de_Salida = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const listNsalida = yield nota_salida_1.NotaSalida.findAll();
     res.json(listNsalida);
