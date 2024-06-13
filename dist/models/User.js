@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.callActualizarPassword = exports.callCrearUsuarioProcedure = exports.User = void 0;
+exports.Mostrar_usuarios = exports.callActualizarPassword = exports.callCrearUsuarioProcedure = exports.User = void 0;
 const sequelize_1 = require("sequelize");
 const conexion_1 = __importDefault(require("../db/conexion"));
 exports.User = conexion_1.default.define('User', {
@@ -58,4 +58,15 @@ function callActualizarPassword(username, password) {
     });
 }
 exports.callActualizarPassword = callActualizarPassword;
+function Mostrar_usuarios() {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const [results, metadata] = yield conexion_1.default.query(`SELECT * FROM mostrar_usuarios()`);
+        }
+        catch (error) {
+            console.error('Error al llamar al procedimiento almacenado:', error);
+        }
+    });
+}
+exports.Mostrar_usuarios = Mostrar_usuarios;
 //# sourceMappingURL=User.js.map

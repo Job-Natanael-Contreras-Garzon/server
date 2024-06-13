@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginUser = exports.newPassword = exports.newUser = void 0;
+exports.getUsuarios = exports.loginUser = exports.newPassword = exports.newUser = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const User_1 = require("../models/User");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -96,4 +96,18 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json(token);
 });
 exports.loginUser = loginUser;
+const getUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const listUsuario = yield (0, User_1.Mostrar_usuarios)();
+        //console.log(_listProduct);
+        res.json(listUsuario);
+    }
+    catch (error) {
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error',
+            error
+        });
+    }
+});
+exports.getUsuarios = getUsuarios;
 //# sourceMappingURL=user.js.map

@@ -6,5 +6,6 @@ const router = (0, express_1.Router)();
 router.post('/newUser', user_1.newUser);
 router.post('/newPassword', user_1.newPassword);
 router.post('/login', user_1.loginUser);
+router.get('/getusers', user_1.getUsuarios);
 exports.default = router;
 //# sourceMappingURL=user.js.map

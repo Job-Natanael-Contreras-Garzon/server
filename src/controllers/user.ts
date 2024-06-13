@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import bycrypt from 'bcryptjs';
-import { User, callActualizarPassword } from '../models/User';
+import { Mostrar_usuarios, User, callActualizarPassword } from '../models/User';
 import jwt from 'jsonwebtoken'
 import { callCrearUsuarioProcedure } from '../models/User';
 
@@ -96,5 +96,20 @@ export const loginUser = async (req: Request, res: Response) => {
 
     res.json(token)
 
+}
+
+export const getUsuarios = async (req:Request, res:Response) => {
+    
+    try {
+        const listUsuario = await Mostrar_usuarios();
+        //console.log(_listProduct);
+        
+        res.json(listUsuario);
+    } catch (error) {
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error',
+            error
+        })
+    }
 }
 
