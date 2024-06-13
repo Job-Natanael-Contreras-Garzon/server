@@ -62,6 +62,7 @@ function Mostrar_usuarios() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const [results, metadata] = yield conexion_1.default.query(`SELECT * FROM mostrar_usuarios()`);
+            return results;
         }
         catch (error) {
             console.error('Error al llamar al procedimiento almacenado:', error);

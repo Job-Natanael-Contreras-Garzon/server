@@ -49,6 +49,7 @@ export async function Mostrar_usuarios(){
     const [results, metadata] = await sequelize.query(
       `SELECT * FROM mostrar_usuarios()`
     );
+    return results;
   } catch (error) {
     console.error('Error al llamar al procedimiento almacenado:', error);
   }
