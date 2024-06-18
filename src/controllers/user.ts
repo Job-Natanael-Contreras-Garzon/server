@@ -6,7 +6,7 @@ import { callCrearUsuarioProcedure } from '../models/User';
 
 export const newUser = async (req: Request, res: Response) => {
     
-    const { nombreAdministrador, telefono, correoElectronico, username, password} = req.body;
+    const { nombreAdministrador, telefono, correoelectronico, username, password} = req.body;
 
     //codificacion de la contraseña
     const hashedPassword = await bycrypt.hash(password,10)
@@ -28,7 +28,7 @@ export const newUser = async (req: Request, res: Response) => {
         //     password: hashedPassword
         // })
         //console.log(nombreAdministrador);
-        await callCrearUsuarioProcedure(nombreAdministrador, telefono, correoElectronico, username, hashedPassword);
+        await callCrearUsuarioProcedure(nombreAdministrador, telefono, correoelectronico, username, hashedPassword);
 
         res.json({
             msg: `Usuario ${username} creado exitosamente`,

@@ -3,6 +3,8 @@ import { User, callActualizarPassword } from '../models/User';
 import { editar_permiso, insertar_permiso, obtener_categoria_permiso } from '../models/permisos';
 
 export const newPermiso = async (req: Request, res: Response) => {
+    console.log(req);
+    
     const {username,perm_habilitado,perm_ver,perm_insertar,perm_editar,perm_eliminar,vista} = req.body;
     try {
         await insertar_permiso(username,perm_habilitado,perm_ver,perm_insertar,perm_editar,perm_eliminar,vista);
