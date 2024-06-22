@@ -29,6 +29,7 @@ export async function Actulizar_nota_salida(codSalida: number,fecha: Date,origen
 
     } catch (error) {
         console.error('Error al llamar al procedimiento almacenado:', error);
+        throw error;
     }
 }
 
@@ -40,6 +41,7 @@ export async function Insertar_detalle_salida(codSalida: number,producto: string
 
     } catch (error) {
         console.error('Error al llamar al procedimiento almacenado:', error);
+        throw error;
     }
 }
 
@@ -51,6 +53,7 @@ export async function Eliminar_nota_salida(codSalida: number) {
 
     } catch (error) {
         console.error('Error al llamar al procedimiento almacenado:', error);
+        throw error;
     }
 }
 
@@ -62,6 +65,7 @@ export async function Mostrar_detalle_nota_salida(codSalida: number) {
     return results;
     } catch (error) {
         console.error('Error al llamar al procedimiento almacenado:', error);
+        throw error;
     }
 }
 
@@ -73,6 +77,7 @@ export async function Actulizar_detalle_salida(codSalida: number,producto: strin
 
     } catch (error) {
         console.error('Error al llamar al procedimiento almacenado:', error);
+        throw error;
     }
 }
 
@@ -84,5 +89,6 @@ export async function Eliminar_detalle_salida(codDetalle: number) {
 
     } catch (error) {
         console.error('Error al llamar al procedimiento almacenado:', error);
+        throw error;
     }
 }

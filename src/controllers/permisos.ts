@@ -11,8 +11,8 @@ export const newPermiso = async (req: Request, res: Response) => {
         })
     } catch (error) {
         res.status(400).json({
-            msg: 'Ups Ocurrio Un error',
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }
 }
@@ -26,8 +26,8 @@ export const actualizar_Permiso = async (req: Request, res: Response) => {
         })
     } catch (error) {
         res.status(400).json({
-            msg: 'Ups Ocurrio Un error',
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }
 }
@@ -49,8 +49,8 @@ export const UserPer = async (req: Request, res: Response) => {
         res.json(permiso)
     } catch (error) {
         res.status(400).json({
-            msg: 'Ups Ocurrio Un error',
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }
 }

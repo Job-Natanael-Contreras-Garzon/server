@@ -18,7 +18,7 @@ const User_1 = require("../models/User");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const User_2 = require("../models/User");
 const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { nombreAdministrador, telefono, correoElectronico, username, password } = req.body;
+    const { nombreAdministrador, telefono, correoelectronico, username, password } = req.body;
     //codificacion de la contraseña
     const hashedPassword = yield bcryptjs_1.default.hash(password, 10);
     //validar si el Usuario ya existe en la Base de Datos
@@ -35,7 +35,7 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         //     password: hashedPassword
         // })
         //console.log(nombreAdministrador);
-        yield (0, User_2.callCrearUsuarioProcedure)(nombreAdministrador, telefono, correoElectronico, username, hashedPassword);
+        yield (0, User_2.callCrearUsuarioProcedure)(nombreAdministrador, telefono, correoelectronico, username, hashedPassword);
         res.json({
             msg: `Usuario ${username} creado exitosamente`,
         });

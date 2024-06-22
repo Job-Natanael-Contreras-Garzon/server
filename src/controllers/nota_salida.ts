@@ -23,7 +23,8 @@ export const newNotaSalida = async (req: Request, res: Response) => {
     } catch (error) {
         console.log(error);
         res.json({
-            msg: `Upps ocurrio un error, comuniquese con soporte`
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         });
     }
 }
@@ -61,8 +62,8 @@ export const deleteNota_Salida = async (req:Request, res: Response) => {
         });
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error'+error,
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }   
 }
@@ -79,8 +80,8 @@ export const updateNota_Salida = async (req: Request, res: Response) => {
         });
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error'+error,
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }
 }
@@ -96,8 +97,8 @@ export const newDetalleSalida = async (req:Request, res: Response) => {
         });
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error'+error,
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }
 }
@@ -112,8 +113,8 @@ export const updateDetalleSalida = async (req:Request, res: Response) => {
         });
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error'+error,
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }
 }
@@ -128,8 +129,8 @@ export const deleteDetalleSalida = async (req:Request, res: Response) => {
         });
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error'+error,
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }   
 }
@@ -142,8 +143,8 @@ export const getDetalleSalida = async (req : Request, res : Response) => {
         res.json(listDetSalida);
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error',
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }
 }

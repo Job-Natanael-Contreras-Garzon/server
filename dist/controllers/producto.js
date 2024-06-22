@@ -21,8 +21,8 @@ const newProducto = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error',
-            error
+            msg: 'Ups Ocurrio Un error' + error.message,
+            error: error.message
         });
     }
 });
@@ -46,8 +46,8 @@ const updateProducto = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error',
-            error
+            msg: 'Ups Ocurrio Un error' + error.message,
+            error: error.message
         });
     }
 });
@@ -76,8 +76,8 @@ const getProducto = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error',
-            error
+            msg: 'Ups Ocurrio Un error' + error.message,
+            error: error.message
         });
     }
 });

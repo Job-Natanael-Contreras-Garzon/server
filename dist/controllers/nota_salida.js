@@ -30,7 +30,8 @@ const newNotaSalida = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     catch (error) {
         console.log(error);
         res.json({
-            msg: `Upps ocurrio un error, comuniquese con soporte`
+            msg: 'Ups Ocurrio Un error' + error.message,
+            error: error.message
         });
     }
 });
@@ -66,8 +67,8 @@ const deleteNota_Salida = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error' + error,
-            error
+            msg: 'Ups Ocurrio Un error' + error.message,
+            error: error.message
         });
     }
 });
@@ -84,8 +85,8 @@ const updateNota_Salida = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error' + error,
-            error
+            msg: 'Ups Ocurrio Un error' + error.message,
+            error: error.message
         });
     }
 });
@@ -100,8 +101,8 @@ const newDetalleSalida = (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error' + error,
-            error
+            msg: 'Ups Ocurrio Un error' + error.message,
+            error: error.message
         });
     }
 });
@@ -116,8 +117,8 @@ const updateDetalleSalida = (req, res) => __awaiter(void 0, void 0, void 0, func
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error' + error,
-            error
+            msg: 'Ups Ocurrio Un error' + error.message,
+            error: error.message
         });
     }
 });
@@ -133,8 +134,8 @@ const deleteDetalleSalida = (req, res) => __awaiter(void 0, void 0, void 0, func
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error' + error,
-            error
+            msg: 'Ups Ocurrio Un error' + error.message,
+            error: error.message
         });
     }
 });
@@ -148,8 +149,8 @@ const getDetalleSalida = (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error',
-            error
+            msg: 'Ups Ocurrio Un error' + error.message,
+            error: error.message
         });
     }
 });

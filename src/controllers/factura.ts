@@ -29,8 +29,8 @@ export const detalle_factura = async (req:Request, res: Response) => {
         })
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error'+error,
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }
 }
@@ -41,8 +41,8 @@ export const mostrar_facturas = async (req : Request, res : Response) => {
         res.json(listFactura);
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error',
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }
 }
@@ -55,8 +55,8 @@ export const getfactura = async (req : Request, res : Response) => {
         res.json(listFactura);
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error',
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }
 }
@@ -69,8 +69,8 @@ export const getDetallefactura = async (req : Request, res : Response) => {
         res.json(listFactura);
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error',
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }
 }
@@ -85,8 +85,8 @@ export const deleteFactura = async (req : Request, res : Response) => {
         })
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error',
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }
 }

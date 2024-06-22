@@ -11,8 +11,8 @@ export const newProducto = async (req:Request, res: Response) => {
         })
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error',
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }
 }
@@ -38,8 +38,8 @@ export const updateProducto = async (req:Request, res: Response) => {
 
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error',
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }
 }
@@ -69,8 +69,8 @@ export const getProducto = async (req:Request, res:Response) => {
         res.json(listProduct);
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error',
-            error
+            msg: 'Ups Ocurrio Un error'+error.message,
+            error: error.message
         })
     }
 }

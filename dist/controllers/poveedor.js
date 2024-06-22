@@ -57,7 +57,8 @@ const newProveedor = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     catch (error) {
         console.log(error);
         res.json({
-            msg: `Upps ocurrio un error, comuniquese con soporte`
+            msg: 'Ups Ocurrio Un error' + error.message,
+            error: error.message
         });
     }
 });
@@ -82,7 +83,8 @@ const updateProveedor = (req, res) => __awaiter(void 0, void 0, void 0, function
     catch (error) {
         console.log(error);
         res.json({
-            msg: `Upps ocurrio un error, comuniquese con soporte`
+            msg: 'Ups Ocurrio Un error' + error.message,
+            error: error.message
         });
     }
 });
