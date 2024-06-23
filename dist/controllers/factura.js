@@ -20,7 +20,7 @@ const newFactura = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error' + error,
+            msg: 'Ups Ocurrio Un error ' + error,
             error
         });
     }
@@ -36,7 +36,7 @@ const detalle_factura = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error' + error.message,
+            msg: 'Ups Ocurrio Un error ' + error.message,
             error: error.message
         });
     }
@@ -49,7 +49,7 @@ const mostrar_facturas = (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error' + error.message,
+            msg: 'Ups Ocurrio Un error ' + error.message,
             error: error.message
         });
     }
@@ -64,7 +64,7 @@ const getfactura = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error' + error.message,
+            msg: 'Ups Ocurrio Un error ' + error.message,
             error: error.message
         });
     }
@@ -79,7 +79,7 @@ const getDetallefactura = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error' + error.message,
+            msg: 'Ups Ocurrio Un error ' + error.message,
             error: error.message
         });
     }
@@ -96,7 +96,7 @@ const deleteFactura = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error' + error.message,
+            msg: 'Ups Ocurrio Un error ' + error.message,
             error: error.message
         });
     }
