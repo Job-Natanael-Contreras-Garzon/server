@@ -45,6 +45,18 @@ export async function Insertar_detalle_salida(codSalida: number,producto: string
     }
 }
 
+export async function Eliminar_notas_vacias() {
+    try {
+    const [results, metadata] = await sequelize.query(
+        `CALL eliminar_notas_salida_vacias()`
+    );
+
+    } catch (error) {
+        console.error('Error al llamar al procedimiento almacenado:', error);
+        throw error;
+    }
+}
+
 export async function Eliminar_nota_salida(codSalida: number) {
     try {
     const [results, metadata] = await sequelize.query(

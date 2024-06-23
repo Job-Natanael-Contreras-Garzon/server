@@ -9,7 +9,7 @@ export const newPermiso = async (req: Request, res: Response) => {
         res.json({
             msg: "Nuevo permiso Insertado"
         })
-    } catch (error) {
+    } catch (error:any) {
         res.status(400).json({
             msg: 'Ups Ocurrio Un error'+error.message,
             error: error.message
@@ -24,7 +24,7 @@ export const actualizar_Permiso = async (req: Request, res: Response) => {
         res.json({
             msg: "Permiso editado con exito"
         })
-    } catch (error) {
+    } catch (error:any) {
         res.status(400).json({
             msg: 'Ups Ocurrio Un error'+error.message,
             error: error.message
@@ -47,7 +47,7 @@ export const UserPer = async (req: Request, res: Response) => {
         const permiso=await obtener_categoria_permiso(username,vista);
 
         res.json(permiso)
-    } catch (error) {
+    } catch (error:any) {
         res.status(400).json({
             msg: 'Ups Ocurrio Un error'+error.message,
             error: error.message

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getDetalleSalida = exports.deleteDetalleSalida = exports.updateDetalleSalida = exports.newDetalleSalida = exports.updateNota_Salida = exports.deleteNota_Salida = exports.getNota_Salida = exports.getNotas_de_Salida = exports.newNotaSalida = void 0;
+exports.deletNotasVacias = exports.getDetalleSalida = exports.deleteDetalleSalida = exports.updateDetalleSalida = exports.newDetalleSalida = exports.updateNota_Salida = exports.deleteNota_Salida = exports.getNota_Salida = exports.getNotas_de_Salida = exports.newNotaSalida = void 0;
 const nota_salida_1 = require("../models/nota_salida");
 const date_fns_tz_1 = require("date-fns-tz");
 const newNotaSalida = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -93,6 +93,7 @@ const updateNota_Salida = (req, res) => __awaiter(void 0, void 0, void 0, functi
 exports.updateNota_Salida = updateNota_Salida;
 const newDetalleSalida = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { cod_salida, nombre_producto, cantidad } = req.body;
+    console.log(cod_salida);
     try {
         yield (0, nota_salida_1.Insertar_detalle_salida)(cod_salida, nombre_producto, cantidad);
         res.json({
@@ -155,4 +156,19 @@ const getDetalleSalida = (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.getDetalleSalida = getDetalleSalida;
+const deletNotasVacias = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield (0, nota_salida_1.Eliminar_notas_vacias)();
+        res.json({
+            msg: "Notas Eliminadas"
+        });
+    }
+    catch (error) {
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error ' + error.message,
+            error: error.message
+        });
+    }
+});
+exports.deletNotasVacias = deletNotasVacias;
 //# sourceMappingURL=nota_salida.js.map
