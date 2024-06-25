@@ -21,19 +21,18 @@ const newProducto = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error' + error.message,
-            error: error.message
+            msg: 'Ups Ocurrio Un error',
+            error
         });
     }
 });
 exports.newProducto = newProducto;
 const updateProducto = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { cod, marca, categoria, stock, precio_compra, precio_venta, fechaVencimineto } = req.body;
+    const { cod, marca, categoria, stock, precio_compra, precio_venta, fecha_vencimiento } = req.body;
     try {
         const product = yield producto_1.Producto.findByPk(cod);
-        console.log(fechaVencimineto);
         if (product) {
-            yield (0, producto_1.callActualizarProducto)(cod, marca, categoria, stock, precio_compra, precio_venta, fechaVencimineto);
+            yield (0, producto_1.callActualizarProducto)(cod, marca, categoria, stock, precio_compra, precio_venta, fecha_vencimiento);
             res.json({
                 msg: `Producto Actualizado`,
             });
@@ -46,8 +45,8 @@ const updateProducto = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error' + error.message,
-            error: error.message
+            msg: 'Ups Ocurrio Un error',
+            error
         });
     }
 });
@@ -76,8 +75,8 @@ const getProducto = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
     catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error' + error.message,
-            error: error.message
+            msg: 'Ups Ocurrio Un error',
+            error
         });
     }
 });

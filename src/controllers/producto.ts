@@ -11,22 +11,21 @@ export const newProducto = async (req:Request, res: Response) => {
         })
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error'+error.message,
-            error: error.message
+            msg: 'Ups Ocurrio Un error',
+            error
         })
     }
 }
 
 export const updateProducto = async (req:Request, res: Response) => {
-    const {cod,marca, categoria, stock, precio_compra, precio_venta, fechaVencimineto} = req.body;
-
+    const {cod,marca, categoria, stock, precio_compra, precio_venta, fecha_vencimiento} = req.body;
+    
     try {
 
         const product= await Producto.findByPk(cod);
-        console.log(fechaVencimineto);
         
         if(product){
-            await callActualizarProducto(cod,marca,categoria,stock,precio_compra,precio_venta,fechaVencimineto);
+            await callActualizarProducto(cod,marca,categoria,stock,precio_compra,precio_venta,fecha_vencimiento);
             res.json({
             msg: `Producto Actualizado`,
             })
@@ -38,8 +37,8 @@ export const updateProducto = async (req:Request, res: Response) => {
 
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error'+error.message,
-            error: error.message
+            msg: 'Ups Ocurrio Un error',
+            error
         })
     }
 }
@@ -69,8 +68,8 @@ export const getProducto = async (req:Request, res:Response) => {
         res.json(listProduct);
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error'+error.message,
-            error: error.message
+            msg: 'Ups Ocurrio Un error',
+            error
         })
     }
 }

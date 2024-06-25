@@ -29,8 +29,7 @@ exports.Producto = conexion_1.default.define('Producto', {
 function callCrearProducto(marca, categoria, stock, precioCompra, precioVenta, fechaVencimineto) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            //console.log(fechaVencimineto);
-            if (fechaVencimineto === undefined) {
+            if (!(fechaVencimineto instanceof Date && !isNaN(fechaVencimineto.getTime()))) {
                 const [results, metadata] = yield conexion_1.default.query(`CALL crear_producto_sin_fecha('${marca}', '${categoria}', '${stock}', '${precioCompra}', '${precioVenta}')`);
             }
             else {

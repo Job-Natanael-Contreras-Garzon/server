@@ -14,9 +14,7 @@ export const Producto = sequelize.define('Producto', {
 //Llamada de los procedimientos almacenador
 export async function callCrearProducto(marca: string, categoria: string, stock: IntegerDataType, precioCompra: DecimalDataType, precioVenta: DecimalDataType, fechaVencimineto: Date) {
     try {
-      //console.log(fechaVencimineto);
-      
-      if(fechaVencimineto===undefined){
+      if(!(fechaVencimineto instanceof Date && !isNaN(fechaVencimineto.getTime()))){
         
         const [results, metadata] = await sequelize.query(
           `CALL crear_producto_sin_fecha('${marca}', '${categoria}', '${stock}', '${precioCompra}', '${precioVenta}')`
