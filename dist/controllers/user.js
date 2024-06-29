@@ -12,13 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsuarios = exports.loginUser = exports.newPassword = exports.newUser = void 0;
+exports.getNombreAdmin = exports.getUsuarios = exports.loginUser = exports.newPassword = exports.newUser = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const User_1 = require("../models/User");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const User_2 = require("../models/User");
 const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { nombreAdministrador, telefono, correoelectronico, username, password } = req.body;
+    const { nombreAdministrador, telefono, correoElectronico, username, password } = req.body;
     //codificacion de la contraseña
     const hashedPassword = yield bcryptjs_1.default.hash(password, 10);
     //validar si el Usuario ya existe en la Base de Datos
@@ -35,7 +35,7 @@ const newUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         //     password: hashedPassword
         // })
         //console.log(nombreAdministrador);
-        yield (0, User_2.callCrearUsuarioProcedure)(nombreAdministrador, telefono, correoelectronico, username, hashedPassword);
+        yield (0, User_2.callCrearUsuarioProcedure)(nombreAdministrador, telefono, correoElectronico, username, hashedPassword);
         res.json({
             msg: `Usuario ${username} creado exitosamente`,
         });
@@ -110,4 +110,17 @@ const getUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.getUsuarios = getUsuarios;
+const getNombreAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const listUsuario = yield (0, User_1.Mostrar_NombreAdmin)();
+        res.json(listUsuario);
+    }
+    catch (error) {
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error',
+            error
+        });
+    }
+});
+exports.getNombreAdmin = getNombreAdmin;
 //# sourceMappingURL=user.js.map

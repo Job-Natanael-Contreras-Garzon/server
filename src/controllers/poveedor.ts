@@ -26,15 +26,21 @@ export const deleteProveedor = async(req:Request,res: Response)=>{
     console.log(codigo);
     
     const proveedor = await Proveedor.findByPk(codigo);
-
-    if (!proveedor) {
-        res.status(404).json({
-            msg: `No existe un proveedor con el id ${codigo}`
-        })
-    } else {
-        await proveedor.destroy();
-        res.json({
-            msg: 'El proveedor fue eliminado con exito!'
+    try {
+        if (!proveedor) {
+            res.status(404).json({
+                msg: `No existe un proveedor con el id ${codigo}`
+            })
+        } else {
+            await proveedor.destroy();
+            res.json({
+                msg: 'El proveedor fue eliminado con exito!'
+            })
+        }
+    } catch (error) {
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error '+error,
+            error
         })
     }
 }
@@ -49,10 +55,9 @@ export const newProveedor = async (req: Request, res: Response) => {
             msg: `El proveedor fue agregado con exito!`
         })
     } catch (error) {
-        console.log(error);
-        res.json({
-            msg: 'Ups Ocurrio Un error'+error.message,
-            error: error.message
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error '+error,
+            error
         })
     }
 }
@@ -81,8 +86,7 @@ export const updateProveedor = async (req: Request, res: Response) => {
     } catch (error) {
         console.log(error);
         res.json({
-            msg: 'Ups Ocurrio Un error'+error.message,
-            error: error.message
+            msg: `Upps ocurrio un error, comuniquese con soporte`
         })
     }
 

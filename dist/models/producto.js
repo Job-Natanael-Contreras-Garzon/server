@@ -38,6 +38,7 @@ function callCrearProducto(marca, categoria, stock, precioCompra, precioVenta, f
         }
         catch (error) {
             console.error('Error al llamar al procedimiento almacenado:', error);
+            throw error;
         }
     });
 }
@@ -54,6 +55,7 @@ function callActualizarProducto(cod, marca, categoria, stock, precioCompra, prec
         }
         catch (error) {
             console.error('Error al llamar al procedimiento almacenado:', error);
+            throw error;
         }
     });
 }

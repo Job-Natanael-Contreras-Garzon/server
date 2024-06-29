@@ -33,15 +33,23 @@ const deleteProveedor = (req, res) => __awaiter(void 0, void 0, void 0, function
     const { codigo } = req.params;
     console.log(codigo);
     const proveedor = yield proveedor_1.Proveedor.findByPk(codigo);
-    if (!proveedor) {
-        res.status(404).json({
-            msg: `No existe un proveedor con el id ${codigo}`
-        });
+    try {
+        if (!proveedor) {
+            res.status(404).json({
+                msg: `No existe un proveedor con el id ${codigo}`
+            });
+        }
+        else {
+            yield proveedor.destroy();
+            res.json({
+                msg: 'El proveedor fue eliminado con exito!'
+            });
+        }
     }
-    else {
-        yield proveedor.destroy();
-        res.json({
-            msg: 'El proveedor fue eliminado con exito!'
+    catch (error) {
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error ' + error,
+            error
         });
     }
 });
@@ -55,10 +63,9 @@ const newProveedor = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         });
     }
     catch (error) {
-        console.log(error);
-        res.json({
-            msg: 'Ups Ocurrio Un error' + error.message,
-            error: error.message
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error ' + error,
+            error
         });
     }
 });
@@ -83,8 +90,7 @@ const updateProveedor = (req, res) => __awaiter(void 0, void 0, void 0, function
     catch (error) {
         console.log(error);
         res.json({
-            msg: 'Ups Ocurrio Un error' + error.message,
-            error: error.message
+            msg: `Upps ocurrio un error, comuniquese con soporte`
         });
     }
 });

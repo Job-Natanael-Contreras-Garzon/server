@@ -12,49 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Mostrar_Clientes = exports.EliminarFactura = exports.getDetalleFactura = exports.getFactura = exports.Mostrar_Factura = exports.insertar_detalle_factura = exports.insertar_factura = exports.Factura = void 0;
+exports.get_Detalles_Boleta_Compra = exports.insertar_Detalle_Boleta_Compra = exports.eliminar_Boleta_Compra = exports.get_Boleta_Compra = exports.Mostrar_Boletas_Compra = exports.insertar_Boleta_Compra = exports.Factura = void 0;
 const sequelize_1 = require("sequelize");
 const conexion_1 = __importDefault(require("../db/conexion"));
-exports.Factura = conexion_1.default.define('Factura', {
+exports.Factura = conexion_1.default.define('BoletaCompra', {
     codigo: {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
 }, {
-    tableName: 'factura', // Nombre de la tabla existente en la base de datos
+    tableName: 'boleta_de_compra', // Nombre de la tabla existente en la base de datos
     timestamps: false // Indica que no hay columnas 'createdAt' y 'updatedAt' en la tabla
 });
 //Llamada de los procedimientos almacenador
-function insertar_factura(ci_cliente, nombre_cliente, correo_cliente, telefono_cliente, nombre_usuario, metodo_pago_nombre, monto_descuento) {
+function insertar_Boleta_Compra(nombre_proveedor, username, pago, descripcion, fecha) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const [results, metadata] = yield conexion_1.default.query(`SELECT * FROM insertar_factura('${ci_cliente}','${nombre_cliente}', '${correo_cliente}','${telefono_cliente}','${nombre_usuario}', 
-                               '${metodo_pago_nombre}','${monto_descuento}')`);
-            return results;
-        }
-        catch (error) {
-            console.error('Error al llamar al procedimiento almacenado:', error);
-        }
-    });
-}
-exports.insertar_factura = insertar_factura;
-function insertar_detalle_factura(codigo_factura, categoria_producto_nombre, cantidad_producto) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const [results, metadata] = yield conexion_1.default.query(`CALL insertar_detalles_factura('${codigo_factura}','${categoria_producto_nombre}', '${cantidad_producto}')`);
-        }
-        catch (error) {
-            console.error('Error al llamar al procedimiento almacenado:', error);
-            throw error;
-        }
-    });
-}
-exports.insertar_detalle_factura = insertar_detalle_factura;
-function Mostrar_Factura() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const [results, metadata] = yield conexion_1.default.query(`SELECT * FROM mostrar_facturas()`);
+            const [results, metadata] = yield conexion_1.default.query(`SELECT * FROM insertar_boleta_compra('${nombre_proveedor}','${username}', '${pago}', '${descripcion}', '${fecha}')`);
             return results;
         }
         catch (error) {
@@ -63,11 +38,11 @@ function Mostrar_Factura() {
         }
     });
 }
-exports.Mostrar_Factura = Mostrar_Factura;
-function getFactura(codigo_factura) {
+exports.insertar_Boleta_Compra = insertar_Boleta_Compra;
+function Mostrar_Boletas_Compra() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const [results, metadata] = yield conexion_1.default.query(`SELECT * FROM getfactura('${codigo_factura}')`);
+            const [results, metadata] = yield conexion_1.default.query(`SELECT * FROM obtener_boletas_compra()`);
             return results;
         }
         catch (error) {
@@ -76,11 +51,11 @@ function getFactura(codigo_factura) {
         }
     });
 }
-exports.getFactura = getFactura;
-function getDetalleFactura(codigo_factura) {
+exports.Mostrar_Boletas_Compra = Mostrar_Boletas_Compra;
+function get_Boleta_Compra(NroBoleta) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const [results, metadata] = yield conexion_1.default.query(`SELECT * FROM mostrar_detalles_factura('${codigo_factura}')`);
+            const [results, metadata] = yield conexion_1.default.query(`SELECT * FROM obtener_boleta_compra('${NroBoleta}')`);
             return results;
         }
         catch (error) {
@@ -89,11 +64,11 @@ function getDetalleFactura(codigo_factura) {
         }
     });
 }
-exports.getDetalleFactura = getDetalleFactura;
-function EliminarFactura(codigo_factura) {
+exports.get_Boleta_Compra = get_Boleta_Compra;
+function eliminar_Boleta_Compra(NroBoleta) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const [results, metadata] = yield conexion_1.default.query(`CALL eliminar_factura('${codigo_factura}')`);
+            const [results, metadata] = yield conexion_1.default.query(`CALL eliminar_boleta_compra('${NroBoleta}')`);
         }
         catch (error) {
             console.error('Error al llamar al procedimiento almacenado:', error);
@@ -101,11 +76,23 @@ function EliminarFactura(codigo_factura) {
         }
     });
 }
-exports.EliminarFactura = EliminarFactura;
-function Mostrar_Clientes() {
+exports.eliminar_Boleta_Compra = eliminar_Boleta_Compra;
+function insertar_Detalle_Boleta_Compra(NroBoleta, producto_nombre, cantidad, precio) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const [results, metadata] = yield conexion_1.default.query(`SELECT * FROM mostrar_clientes_vinculados()`);
+            const [results, metadata] = yield conexion_1.default.query(`CALL insertar_detalle_compra('${NroBoleta}','${producto_nombre}', '${cantidad}', '${precio}')`);
+        }
+        catch (error) {
+            console.error('Error al llamar al procedimiento almacenado:', error);
+            throw error;
+        }
+    });
+}
+exports.insertar_Detalle_Boleta_Compra = insertar_Detalle_Boleta_Compra;
+function get_Detalles_Boleta_Compra(NroBoleta) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const [results, metadata] = yield conexion_1.default.query(`SELECT * FROM obtener_detalles_boleta_compra('${NroBoleta}')`);
             return results;
         }
         catch (error) {
@@ -114,5 +101,5 @@ function Mostrar_Clientes() {
         }
     });
 }
-exports.Mostrar_Clientes = Mostrar_Clientes;
-//# sourceMappingURL=factura.js.map
+exports.get_Detalles_Boleta_Compra = get_Detalles_Boleta_Compra;
+//# sourceMappingURL=boleta_compra.js.map

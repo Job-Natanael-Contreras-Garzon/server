@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { deleteFactura, detalle_factura, getDetallefactura, getfactura, mostrar_facturas, newFactura } from '../controllers/factura';
+import { deleteFactura, detalle_factura, getDetallefactura, getfactura, mostrar_clientes, mostrar_facturas, newFactura } from '../controllers/factura';
 
 const router = Router();
 
@@ -11,4 +11,5 @@ router.get('/getFactura/:cod',getfactura);
 router.get('/getDetalleFactura/:cod',getDetallefactura);
 router.delete('/:cod',deleteFactura);
 
+router.get('/MostrarClientes',mostrar_clientes);
 export default router;

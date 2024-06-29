@@ -53,5 +53,16 @@ export async function Mostrar_usuarios(){
   } catch (error) {
     console.error('Error al llamar al procedimiento almacenado:', error);
   }
-}
+};
+
+export async function Mostrar_NombreAdmin(){
+  try {
+    const [results, metadata] = await sequelize.query(
+      `SELECT * FROM mostrar_administradores_vinculados()`
+    );
+    return results;
+  } catch (error) {
+    console.error('Error al llamar al procedimiento almacenado:', error);
+  }
+};
 

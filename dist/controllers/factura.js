@@ -9,13 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteFactura = exports.getDetallefactura = exports.getfactura = exports.mostrar_facturas = exports.detalle_factura = exports.newFactura = void 0;
+exports.mostrar_clientes = exports.deleteFactura = exports.getDetallefactura = exports.getfactura = exports.mostrar_facturas = exports.detalle_factura = exports.newFactura = void 0;
 const factura_1 = require("../models/factura");
 const newFactura = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { ci_cliente, nombre_cliente, correo_cliente, telefono_cliente, nombre_usuario, metodo_pago_nombre } = req.body;
-    console.log(nombre_usuario);
+    const { ci_cliente, nombre_cliente, correo_cliente, telefono_cliente, nombre_usuario, metodo_pago_nombre, monto_descuento } = req.body;
+    console.log(req.body);
     try {
-        const codFac = yield (0, factura_1.insertar_factura)(ci_cliente, nombre_cliente, correo_cliente, telefono_cliente, nombre_usuario, metodo_pago_nombre);
+        const codFac = yield (0, factura_1.insertar_factura)(ci_cliente, nombre_cliente, correo_cliente, telefono_cliente, nombre_usuario, metodo_pago_nombre, monto_descuento);
         res.json(codFac);
     }
     catch (error) {
@@ -102,4 +102,17 @@ const deleteFactura = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.deleteFactura = deleteFactura;
+const mostrar_clientes = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const listcliente = yield (0, factura_1.Mostrar_Clientes)();
+        res.json(listcliente);
+    }
+    catch (error) {
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error ' + error.message,
+            error: error.message
+        });
+    }
+});
+exports.mostrar_clientes = mostrar_clientes;
 //# sourceMappingURL=factura.js.map

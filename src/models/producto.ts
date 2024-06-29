@@ -26,6 +26,7 @@ export async function callCrearProducto(marca: string, categoria: string, stock:
       }
     } catch (error) {
       console.error('Error al llamar al procedimiento almacenado:', error);
+      throw error; 
     }
   }
 
@@ -44,6 +45,7 @@ export async function callCrearProducto(marca: string, categoria: string, stock:
       }
     } catch (error) {
       console.error('Error al llamar al procedimiento almacenado:', error);
+      throw error; 
     }
   }
 

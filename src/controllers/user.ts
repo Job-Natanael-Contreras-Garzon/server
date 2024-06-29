@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import bycrypt from 'bcryptjs';
-import { Mostrar_usuarios, User, callActualizarPassword } from '../models/User';
+import { Mostrar_NombreAdmin, Mostrar_usuarios, User, callActualizarPassword } from '../models/User';
 import jwt from 'jsonwebtoken'
 import { callCrearUsuarioProcedure } from '../models/User';
 
 export const newUser = async (req: Request, res: Response) => {
     
-    const { nombreAdministrador, telefono, correoelectronico, username, password} = req.body;
+    const { nombreAdministrador, telefono, correoElectronico, username, password} = req.body;
 
     //codificacion de la contraseña
     const hashedPassword = await bycrypt.hash(password,10)
@@ -28,7 +28,7 @@ export const newUser = async (req: Request, res: Response) => {
         //     password: hashedPassword
         // })
         //console.log(nombreAdministrador);
-        await callCrearUsuarioProcedure(nombreAdministrador, telefono, correoelectronico, username, hashedPassword);
+        await callCrearUsuarioProcedure(nombreAdministrador, telefono, correoElectronico, username, hashedPassword);
 
         res.json({
             msg: `Usuario ${username} creado exitosamente`,
@@ -111,5 +111,18 @@ export const getUsuarios = async (req:Request, res:Response) => {
             error
         })
     }
-}
+};
+
+export const getNombreAdmin = async (req:Request, res:Response) => {
+    
+    try {
+        const listUsuario = await Mostrar_NombreAdmin();
+        res.json(listUsuario);
+    } catch (error) {
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error',
+            error
+        })
+    }
+};
 

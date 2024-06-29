@@ -24,17 +24,24 @@ export const deleteAlamcen = async(req:Request,res: Response)=>{
     console.log(id);
     
     const alamcen = await Almacen.findByPk(id);
-
-    if (!alamcen) {
-        res.status(404).json({
-            msg: `No existe un proveedor con el id ${id}`
-        })
-    } else {
-        await alamcen.destroy();
-        res.json({
-            msg: 'El proveedor fue eliminado con exito!'
+    try {
+        if (!alamcen) {
+            res.status(404).json({
+                msg: `No existe un proveedor con el id ${id}`
+            })
+        } else {
+            await alamcen.destroy();
+            res.json({
+                msg: 'El proveedor fue eliminado con exito!'
+            })
+        }
+    } catch (error) {
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error '+error,
+            error
         })
     }
+    
 }
 
 export const newAlmacen = async (req: Request, res: Response) => {
@@ -47,9 +54,9 @@ export const newAlmacen = async (req: Request, res: Response) => {
             msg: `El Alamacen fue agregado con exito!`
         })
     } catch (error) {
-        console.log(error);
-        res.json({
-            msg: `Upps ocurrio un error, comuniquese con soporte`
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error '+error,
+            error
         })
     }
 }
@@ -76,9 +83,9 @@ export const updateAlamcen = async (req: Request, res: Response) => {
     }
         
     } catch (error) {
-        console.log(error);
-        res.json({
-            msg: `Upps ocurrio un error, comuniquese con soporte`
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error '+error,
+            error
         })
     }
 

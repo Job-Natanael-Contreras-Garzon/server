@@ -13,11 +13,11 @@ export const Factura = sequelize.define('Factura', {
 });
 //Llamada de los procedimientos almacenador
 export async function insertar_factura(ci_cliente: number,nombre_cliente: string, correo_cliente: string, telefono_cliente: string,
-                                      nombre_usuario: string, metodo_pago_nombre: string) {
+                                      nombre_usuario: string, metodo_pago_nombre: string,monto_descuento:number) {
     try {
       const [results, metadata] = await sequelize.query(
         `SELECT * FROM insertar_factura('${ci_cliente}','${nombre_cliente}', '${correo_cliente}','${telefono_cliente}','${nombre_usuario}', 
-                               '${metodo_pago_nombre}')`
+                               '${metodo_pago_nombre}','${monto_descuento}')`
       );
       return results
     } catch (error) {
@@ -81,6 +81,19 @@ export async function EliminarFactura(codigo_factura : number) {
     const [results, metadata] = await sequelize.query(
       `CALL eliminar_factura('${codigo_factura}')`
     );
+
+  } catch (error) {
+      console.error('Error al llamar al procedimiento almacenado:', error);
+      throw error; 
+  }
+}
+
+export async function Mostrar_Clientes() {
+  try {
+    const [results, metadata] = await sequelize.query(
+        `SELECT * FROM mostrar_clientes_vinculados()`
+    );
+  return results;
 
   } catch (error) {
       console.error('Error al llamar al procedimiento almacenado:', error);

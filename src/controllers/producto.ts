@@ -11,7 +11,7 @@ export const newProducto = async (req:Request, res: Response) => {
         })
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error',
+            msg: 'Ups Ocurrio Un error '+error,
             error
         })
     }
@@ -37,7 +37,7 @@ export const updateProducto = async (req:Request, res: Response) => {
 
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error',
+            msg: 'Ups Ocurrio Un error '+error,
             error
         })
     }
@@ -46,17 +46,23 @@ export const updateProducto = async (req:Request, res: Response) => {
 export const deleteProduct = async (req:Request, res:Response) =>{
     const {cod}=req.params;
     const product = await Producto.findByPk(cod);
-    if(!product){
-        res.status(404).json({
-            msg: `No Existe un producto con el codigo ${cod}`,
-        })
-    }else{
-        await product.destroy();
-        res.json({
-            msg: 'El producto fue eliminado con exito!'
+    try {
+        if(!product){
+            res.status(404).json({
+                msg: `No Existe un producto con el codigo ${cod}`,
+            })
+        }else{
+            await product.destroy();
+            res.json({
+                msg: 'El producto fue eliminado con exito!'
+            })
+        }
+    } catch (error) {
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error '+error,
+            error
         })
     }
-
 }
 
 export const getProducto = async (req:Request, res:Response) => {
@@ -68,7 +74,7 @@ export const getProducto = async (req:Request, res:Response) => {
         res.json(listProduct);
     } catch (error) {
         res.status(401).json({
-            msg: 'Ups Ocurrio Un error',
+            msg: 'Ups Ocurrio Un error '+error,
             error
         })
     }

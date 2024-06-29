@@ -12,6 +12,7 @@ import routerbitacora from './routes/bitacora';
 import routerinventario from './routes/inventario';
 import routernotasalida from './routes/nota_salida';
 import routerpermisos from './routes/permisos';
+import routerboletacompra from './routes/boleta_compra';
 import { User } from "./models/User";
 
 class Server {
@@ -43,6 +44,7 @@ class Server {
         this.app.use('/api/inventario',routerinventario);
         this.app.use('/api/notasalida',routernotasalida);
         this.app.use('/api/permisos',routerpermisos);
+        this.app.use('/api/boletacompra',routerboletacompra);
     }
 
     private middlewares() {

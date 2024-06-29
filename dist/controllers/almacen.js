@@ -33,15 +33,23 @@ const deleteAlamcen = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     const { id } = req.params;
     console.log(id);
     const alamcen = yield almacen_1.Almacen.findByPk(id);
-    if (!alamcen) {
-        res.status(404).json({
-            msg: `No existe un proveedor con el id ${id}`
-        });
+    try {
+        if (!alamcen) {
+            res.status(404).json({
+                msg: `No existe un proveedor con el id ${id}`
+            });
+        }
+        else {
+            yield alamcen.destroy();
+            res.json({
+                msg: 'El proveedor fue eliminado con exito!'
+            });
+        }
     }
-    else {
-        yield alamcen.destroy();
-        res.json({
-            msg: 'El proveedor fue eliminado con exito!'
+    catch (error) {
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error ' + error,
+            error
         });
     }
 });
@@ -55,9 +63,9 @@ const newAlmacen = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         });
     }
     catch (error) {
-        console.log(error);
-        res.json({
-            msg: `Upps ocurrio un error, comuniquese con soporte`
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error ' + error,
+            error
         });
     }
 });
@@ -80,9 +88,9 @@ const updateAlamcen = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         }
     }
     catch (error) {
-        console.log(error);
-        res.json({
-            msg: `Upps ocurrio un error, comuniquese con soporte`
+        res.status(401).json({
+            msg: 'Ups Ocurrio Un error ' + error,
+            error
         });
     }
 });
